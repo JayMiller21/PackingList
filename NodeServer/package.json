@@ -1,0 +1,19 @@
+{
+  "name": "packing-list",
+  "version": "1.0.0",
+  "description": "Create packing lists and templates to make packing for trips easier.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:JayMiller21/PackingList.git"
+  },
+  "author": "Jay Miller",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
