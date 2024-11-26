@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import React from 'react';
+import {
+  useQuery,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 import './App.css';
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <QueryClientProvider client={queryClient}>
+      <PageContent />
+    </QueryClientProvider>
+  )
+}
+
+function PageContent() {
+  const { data } = useQuery({
+    queryKey: ['hi'],
+    queryFn: async () => {
+      const response = await fetch('/hello')
+      const responseJson = await response.json();
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return responseJson.message;
+    },
+  })
+
+  return (
+    <div>
+      <h1>My React App</h1>
+      {data && <p>Data from the server: {data}</p>}
     </div>
   );
 }
